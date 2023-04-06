@@ -45,7 +45,7 @@ func main() {
 
 	// +optional set metric path, default /debug/metrics
 	m.SetMetricPath("/metrics")
-	// +optional set slow time, default 5s
+	// +optional set slow time, default 5000ms
 	m.SetSlowTime(10)
 	// +optional set request duration, default {0.1, 0.3, 1.2, 5, 10}
 	// used to p95, p99

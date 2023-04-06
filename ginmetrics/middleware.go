@@ -94,7 +94,7 @@ func (m *Monitor) initGinMetrics() {
 	_ = monitor.AddMetric(&Metric{
 		Type:        Counter,
 		Name:        metricSlowRequest,
-		Description: fmt.Sprintf("the server handled slow requests counter, t=%d.", m.slowTime),
+		Description: fmt.Sprintf("the server handled slow requests counter, t=%dms.", m.slowTime),
 		Labels:      []string{"uri", "method", "code"},
 	})
 }
@@ -138,7 +138,7 @@ func (m *Monitor) ginMetricHandle(ctx *gin.Context, start time.Time) {
 
 	// set slow request
 	latency := time.Since(start)
-	if int32(latency.Seconds()) > m.slowTime {
+	if int32(latency.Milliseconds()) > m.slowTime {
 		_ = m.GetMetric(metricSlowRequest).Inc([]string{ctx.FullPath(), r.Method, strconv.Itoa(w.Status())})
 	}
 

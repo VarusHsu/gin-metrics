@@ -15,7 +15,7 @@ const (
 	Summary
 
 	defaultMetricPath = "/debug/metrics"
-	defaultSlowTime   = int32(5)
+	defaultSlowTime   = int32(5000)
 )
 
 var (
@@ -67,7 +67,7 @@ func (m *Monitor) SetMetricPath(path string) {
 }
 
 // SetSlowTime set slowTime property. slowTime is used to determine whether
-// the request is slow. For "gin_slow_request_total" metric.
+// the request is slow. For "gin_slow_request_total" metric.(ms)
 func (m *Monitor) SetSlowTime(slowTime int32) {
 	m.slowTime = slowTime
 }
